@@ -8,8 +8,8 @@ const _geist = Geist({ subsets: ["latin"] });
 const _geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'HRMS Portal - Employee Self Service',
-  description: 'Enterprise Employee Self-Service Portal for HR services, tasks, and support tickets',
+  title: 'Employee Centre - Leave Request | Enhance Services',
+  description: 'HRMS Employee Centre for managing leave requests',
   generator: 'v0.app',
   icons: {
     icon: [
