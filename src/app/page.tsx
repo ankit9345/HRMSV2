@@ -1,3 +1,5 @@
+"use client"
+
 import { Header } from "@/components/hrms/header"
 import { Hero } from "@/components/hrms/hero"
 import { FeaturesSection } from "@/components/hrms/features-section"

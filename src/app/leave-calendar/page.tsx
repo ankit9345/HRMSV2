@@ -4,14 +4,15 @@ import { useState } from "react"
 import { Header } from "@/components/header"
 import { Sidebar } from "@/components/sidebar"
 import { LeaveCalendarView } from "@/components/leave-calendar-view"
+import { LeaveFooter } from "@/components/leave-footer"
 
 export default function LeaveCalendarPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="flex min-h-screen flex-col bg-background">
       <Header onMenuClick={() => setSidebarOpen(true)} />
-      <div className="flex">
+      <div className="flex flex-1">
         <Sidebar
           isOpen={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
@@ -21,6 +22,7 @@ export default function LeaveCalendarPage() {
           <LeaveCalendarView />
         </main>
       </div>
+      <LeaveFooter />
     </div>
   )
 }

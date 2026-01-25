@@ -12,31 +12,31 @@ const features = [
     title: "Payrolls",
     description: "Reliable & Accurate Payroll Management",
     image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80",
-    href: "#",
+    href: "/payroll",
   },
   {
     title: "Roster / Shift",
     description: "Plan Shifts Smarter and Faster",
     image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&q=80",
-    href: "#",
+    href: "/roster",
   },
   {
     title: "Organization Policies",
     description: "Clear policies for a stronger organization",
     image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&q=80",
-    href: "#",
+    href: "/organization-policies",
   },
   {
     title: "Ask for IT",
     description: "Report technical issues instantly",
     image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&q=80",
-    href: "#",
+    href: "/ask-for-it",
   },
   {
     title: "Ask for HR",
     description: "A simple way to communicate HR issues",
     image: "https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=400&q=80",
-    href: "#",
+    href: "/ask-for-hr",
   },
 ]
 
@@ -47,12 +47,12 @@ export function FeaturesSection() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
           {features.map((feature) => (
             <Link key={feature.title} href={feature.href}>
-              <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer overflow-hidden border-0 shadow-md">
+              <Card className="h-full hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden border-0 shadow-md transform hover:scale-105">
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
                     src={feature.image || "/placeholder.svg"}
                     alt={feature.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                   />
                 </div>
                 <CardContent className="p-3">

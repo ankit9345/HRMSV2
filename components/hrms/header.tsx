@@ -8,40 +8,41 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { logout } from "@/components/auth-guard"
 
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full bg-card border-b">
       <div className="container flex h-14 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center">
-          <div className="relative">
-            <div className="bg-primary text-primary-foreground px-3 py-1 rounded border-2 border-primary">
-              <span className="font-serif italic text-lg font-bold tracking-wide">Enhance</span>
-            </div>
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground text-[8px] px-2 py-0.5 tracking-widest font-semibold">
-              SERVICES
-            </div>
-          </div>
+          <img 
+            src="/images/logo.png" 
+            alt="Enhance Services" 
+            className="h-10 w-auto"
+          />
         </Link>
         
         <nav className="flex items-center gap-6">
           <Link 
-            href="/leave-request" 
-            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+            href="/hrms" 
+            className="relative text-sm font-medium text-foreground hover:text-primary transition-colors group"
           >
             HRMS
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-out group-hover:w-full" />
           </Link>
           <Link 
             href="#" 
-            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+            className="relative text-sm font-medium text-foreground hover:text-primary transition-colors group"
           >
             MY TASK
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-out group-hover:w-full" />
           </Link>
           <Link 
             href="#" 
-            className="text-sm font-medium text-foreground hover:text-primary transition-colors"
+            className="relative text-sm font-medium text-foreground hover:text-primary transition-colors group"
           >
             MY TICKETS
+            <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 ease-out group-hover:w-full" />
           </Link>
           
           <DropdownMenu>
@@ -54,7 +55,7 @@ export function Header() {
             <DropdownMenuContent align="end">
               <DropdownMenuItem>Profile</DropdownMenuItem>
               <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={logout} className="cursor-pointer">Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </nav>

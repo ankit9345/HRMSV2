@@ -9,48 +9,19 @@ export function Hero() {
   const [searchQuery, setSearchQuery] = useState("")
 
   return (
-    <section className="relative h-[400px] overflow-hidden">
-      {/* Background Image */}
+    <section className="relative h-[350px] overflow-hidden">
+      {/* Background Banner Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80')`,
+          backgroundImage: `url('/images/banner1.jpg')`,
         }}
-      >
-        {/* Gradient overlay - color on left, grayscale on right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-white/70" />
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 via-transparent to-gray-100/90" />
-      </div>
-
-      {/* Business professionals overlay on left side */}
-      <div className="absolute left-0 bottom-0 h-full w-1/3 flex items-end">
-        <div 
-          className="w-full h-[95%] bg-contain bg-bottom bg-no-repeat"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80')`,
-          }}
-        />
-      </div>
+      />
 
       {/* Content */}
-      <div className="relative z-10 container h-full flex flex-col items-center justify-center px-4 md:px-6">
-        {/* Banner ribbon */}
-        <div className="absolute left-1/4 top-16 -translate-x-1/2">
-          <div className="relative">
-            <div className="bg-[#2d8a9e] text-white px-8 py-3 clip-ribbon">
-              <span className="font-serif italic text-2xl font-bold">Enhance</span>
-              <div className="text-[10px] tracking-widest text-center mt-0.5">PROPERTY MANAGEMENT</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Quote text on right */}
-        <div className="absolute right-16 top-24 text-4xl font-serif italic text-gray-600 hidden lg:block">
-          {'"'}...in the details.{'"'}
-        </div>
-
+      <div className="relative z-10 container h-full flex flex-col items-center justify-end pb-16 px-4 md:px-6">
         {/* Search bar */}
-        <div className="flex w-full max-w-2xl mt-20">
+        <div className="flex w-full max-w-2xl">
           <div className="flex w-full bg-white rounded-sm shadow-lg overflow-hidden">
             <Input
               type="text"
