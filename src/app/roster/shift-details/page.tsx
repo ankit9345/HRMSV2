@@ -11,7 +11,7 @@ export default function ShiftDetailsPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
+      <Header onMenuClick={() => setSidebarOpen(true)} />
       <div className="flex flex-1">
         <RosterSidebar
           isOpen={sidebarOpen}

@@ -43,8 +43,8 @@ const features = [
 export function FeaturesSection() {
   return (
     <section id="features" className="py-12 bg-background">
-      <div className="container px-4 md:px-6">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div className="container px-4 md:px-6 mx-auto max-w-7xl">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 justify-items-center">
           {features.map((feature) => (
             <Link key={feature.title} href={feature.href}>
               <Card className="h-full hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden border-0 shadow-md transform hover:scale-105">
