@@ -17,8 +17,23 @@ import {
 } from "@/components/ui/select"
 import { Save, X } from "lucide-react"
 
+const subDepartmentOptions: Record<string, string[]> = {
+  cleaning: ["Supervisor", "Cleaner L1", "Cleaner L2"],
+  security: ["Static Guarding", "Mobile Patrol", "Concierge", "Crowd Control"],
+  gardening: ["Supervisor", "Garden Hand", "Land Scaper", "Arborist"],
+  it: [],
+  accounts: [],
+  sales: [],
+  marketing: [],
+  operations: [],
+  compliance: [],
+  hr: [],
+  admin: [],
+}
+
 export default function OffboardingEmployeeJoiningCreateNewPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [department, setDepartment] = useState("")
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -39,19 +54,39 @@ export default function OffboardingEmployeeJoiningCreateNewPage() {
               <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
                 <Input placeholder="Case ID" />
                 <Input placeholder="Requester Name" />
-                <Select>
+                <Select onValueChange={setDepartment}>
                   <SelectTrigger>
                     <SelectValue placeholder="Department" />
                   </SelectTrigger>
                   <SelectContent>
+                    <SelectItem value="cleaning">Cleaning</SelectItem>
+                    <SelectItem value="security">Security</SelectItem>
+                    <SelectItem value="gardening">Gardening</SelectItem>
                     <SelectItem value="it">IT</SelectItem>
-                    <SelectItem value="hr">HR</SelectItem>
-                    <SelectItem value="operations">Operations</SelectItem>
-                    <SelectItem value="marketing">Marketing</SelectItem>
+                    <SelectItem value="accounts">Accounts</SelectItem>
                     <SelectItem value="sales">Sales</SelectItem>
-                    <SelectItem value="finance">Finance</SelectItem>
+                    <SelectItem value="marketing">Marketing</SelectItem>
+                    <SelectItem value="operations">Operations</SelectItem>
+                    <SelectItem value="compliance">Compliance</SelectItem>
+                    <SelectItem value="hr">HR</SelectItem>
+                    <SelectItem value="admin">Admin</SelectItem>
                   </SelectContent>
                 </Select>
+                <Select disabled={!department || subDepartmentOptions[department]?.length === 0}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Sub Department" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {department && subDepartmentOptions[department]?.map((subDept) => (
+                      <SelectItem key={subDept} value={subDept.toLowerCase().replace(/\s+/g, "-")}>
+                        {subDept}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
                 <Select>
                   <SelectTrigger>
                     <SelectValue placeholder="Category" />
@@ -62,9 +97,6 @@ export default function OffboardingEmployeeJoiningCreateNewPage() {
                     <SelectItem value="compensation">Compensation</SelectItem>
                   </SelectContent>
                 </Select>
-              </div>
-              
-              <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
                 <Select>
                   <SelectTrigger>
                     <SelectValue placeholder="Status" />
@@ -86,21 +118,15 @@ export default function OffboardingEmployeeJoiningCreateNewPage() {
                   </SelectContent>
                 </Select>
                 <Input placeholder="Assignment Group" />
+              </div>
+              
+              <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-4">
                 <Input placeholder="Assign to" />
-              </div>
-              
-              <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-3">
                 <Input placeholder="Impact" />
-                <Input placeholder="Argency" />
-                <Input placeholder="Priority" />
               </div>
               
               <div className="mt-4">
-                <Textarea placeholder="Short Description" className="min-h-[80px]" />
-              </div>
-              
-              <div className="mt-4">
-                <Textarea placeholder="Description" className="min-h-[120px]" />
+                <Textarea placeholder="Comment" className="min-h-[80px]" />
               </div>
             </CardContent>
             <div className="flex justify-end gap-2 border-t bg-muted/30 px-6 py-4">

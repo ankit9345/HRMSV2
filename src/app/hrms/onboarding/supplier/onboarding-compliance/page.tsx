@@ -1,36 +1,30 @@
 "use client"
 
-import React from "react"
-
-import { useState, useRef } from "react"
+import { useState } from "react"
 import { Header } from "@/components/header"
 import { HrmsSidebar } from "@/components/hrms-sidebar"
 import { LeaveFooter } from "@/components/leave-footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
-import { Save, X } from "lucide-react"
+import { Save, X, Calendar } from "lucide-react"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { Calendar as CalendarComponent } from "@/components/ui/calendar"
+import { format } from "date-fns"
+import { cn } from "@/lib/utils"
 
 export default function SupplierOnboardingCompliancePage() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [certificateFileName, setCertificateFileName] = useState("")
-  const [licenceFileName, setLicenceFileName] = useState("")
-  const certificateInputRef = useRef<HTMLInputElement>(null)
-  const licenceInputRef = useRef<HTMLInputElement>(null)
-
-  const handleCertificateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      setCertificateFileName(file.name)
-    }
-  }
-
-  const handleLicenceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      setLicenceFileName(file.name)
-    }
-  }
+  const [contractStartDate, setContractStartDate] = useState<Date>()
+  const [contractEndDate, setContractEndDate] = useState<Date>()
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -45,65 +39,108 @@ export default function SupplierOnboardingCompliancePage() {
         <main className="flex-1 p-6 lg:ml-64">
           <Card>
             <CardHeader className="bg-muted py-3 px-4">
-              <CardTitle className="text-base font-medium">Joining Compliance</CardTitle>
+              <CardTitle className="text-base font-medium">Onboarding Compliance</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               <div className="space-y-4">
-                {/* Row 1 - Input fields */}
+                {/* Row 1 */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <Input placeholder="Employee Name" />
-                  <Input placeholder="Manager Name" />
-                  <Input placeholder="Training 1" />
-                  <Input placeholder="Training 2" />
+                  <Input placeholder="Company Name" />
+                  <Input placeholder="ABN" />
+                  <Input placeholder="ACN" />
+                  <Input placeholder="Address" />
                 </div>
 
-                {/* Row 2 - File uploads */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Upload Certificate</label>
-                    <div className="flex items-center">
-                      <input
-                        type="file"
-                        ref={certificateInputRef}
-                        onChange={handleCertificateChange}
-                        className="hidden"
-                        accept=".pdf,.doc,.docx,.jpg,.png"
-                      />
-                      <Button
-                        variant="outline"
-                        onClick={() => certificateInputRef.current?.click()}
-                        className="rounded-r-none border-r-0"
-                      >
-                        Choose file
-                      </Button>
-                      <div className="flex-1 px-4 py-2 border border-input rounded-r-md bg-background text-sm text-muted-foreground">
-                        {certificateFileName || "No file chosen"}
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Upload Driving Licence</label>
-                    <div className="flex items-center">
-                      <input
-                        type="file"
-                        ref={licenceInputRef}
-                        onChange={handleLicenceChange}
-                        className="hidden"
-                        accept=".pdf,.doc,.docx,.jpg,.png"
-                      />
-                      <Button
-                        variant="outline"
-                        onClick={() => licenceInputRef.current?.click()}
-                        className="rounded-r-none border-r-0"
-                      >
-                        Choose file
-                      </Button>
-                      <div className="flex-1 px-4 py-2 border border-input rounded-r-md bg-background text-sm text-muted-foreground">
-                        {licenceFileName || "No file chosen"}
-                      </div>
-                    </div>
-                  </div>
+                {/* Row 2 */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <Input placeholder="Client SPOC Name" />
+                  <Input placeholder="SPOC Number" />
+                  <Input placeholder="Email Address" type="email" />
+                  <Input placeholder="Company Address" />
                 </div>
+
+                {/* Row 3 */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <Input placeholder="Company Phone Number" />
+                  <Input placeholder="Contract Number" />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "justify-start text-left font-normal bg-transparent",
+                          !contractStartDate && "text-muted-foreground"
+                        )}
+                      >
+                        <Calendar className="mr-2 h-4 w-4" />
+                        {contractStartDate ? format(contractStartDate, "PPP") : "Contract Start Date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <CalendarComponent
+                        mode="single"
+                        selected={contractStartDate}
+                        onSelect={setContractStartDate}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "justify-start text-left font-normal bg-transparent",
+                          !contractEndDate && "text-muted-foreground"
+                        )}
+                      >
+                        <Calendar className="mr-2 h-4 w-4" />
+                        {contractEndDate ? format(contractEndDate, "PPP") : "Contract End Date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <CalendarComponent
+                        mode="single"
+                        selected={contractEndDate}
+                        onSelect={setContractEndDate}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+
+                {/* Row 4 - Type of Contract */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Type of Contract" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="adhoc">Adhoc</SelectItem>
+                      <SelectItem value="contractual">Contractual</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Row 5 - Business and License fields */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <Input placeholder="Business Registration" />
+                  <Input placeholder="GST Registration" />
+                  <Input placeholder="Labour Hire License" />
+                  <Input placeholder="Security Provider Business License" />
+                </div>
+
+                {/* Row 6 - Insurance fields */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <Input placeholder="Public Liability" />
+                  <Input placeholder="Work Cover" />
+                </div>
+
+                {/* Short Description */}
+                <Textarea placeholder="Short Description" className="min-h-[80px]" />
+
+                {/* Description */}
+                <Textarea placeholder="Description" className="min-h-[120px]" />
               </div>
             </CardContent>
             <div className="flex items-center justify-end gap-2 bg-muted px-4 py-3">

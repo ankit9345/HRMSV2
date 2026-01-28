@@ -7,8 +7,8 @@ import { LeaveFooter } from "@/components/leave-footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const resolvedCases = [
-  { id: "103", requester: "Saumya Singh", department: "Operations", shortDesc: "The point of using Lorem Ipsum is that it ...", description: "The point of using Lorem Ipsum is that it ...", category: "Compensation", status: "Resolved", subStatus: "", assignmentGroup: "Recruitment Team", assignTo: "HR", impact: "", argency: "", priority: "" },
-  { id: "104", requester: "Kanak Singh", department: "HR", shortDesc: "The point of using Lorem Ipsum is that it ...", description: "The point of using Lorem Ipsum is that it ...", category: "Compensation", status: "Resolved", subStatus: "", assignmentGroup: "Recruitment Team", assignTo: "HR", impact: "", argency: "", priority: "" },
+  { id: "103", department: "Gardening", subDepartment: "Garden Hand", documentNumber: "DOC-003", validFrom: "2024-03-01", validTill: "2025-03-01", workRights: "Working Visa", driverLicense: "Yes", wwcc: "Yes", policeCheck: "Yes" },
+  { id: "105", department: "HR", subDepartment: "", documentNumber: "DOC-005", validFrom: "2024-05-01", validTill: "2025-05-01", workRights: "PR", driverLicense: "Yes", wwcc: "Yes", policeCheck: "Yes" },
 ]
 
 export default function PreJoiningComplianceResolvedPage() {
@@ -34,37 +34,31 @@ export default function PreJoiningComplianceResolvedPage() {
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="bg-[#1e88e5] text-white">
-                      <th className="px-3 py-3 text-left font-medium">Case ID</th>
-                      <th className="px-3 py-3 text-left font-medium">Requester Name</th>
+                      <th className="px-3 py-3 text-left font-medium">ID</th>
                       <th className="px-3 py-3 text-left font-medium">Department</th>
-                      <th className="px-3 py-3 text-left font-medium">Short Description</th>
-                      <th className="px-3 py-3 text-left font-medium">Description</th>
-                      <th className="px-3 py-3 text-left font-medium">Category</th>
-                      <th className="px-3 py-3 text-left font-medium">Status</th>
-                      <th className="px-3 py-3 text-left font-medium">Sub Status</th>
-                      <th className="px-3 py-3 text-left font-medium">Assignment Group</th>
-                      <th className="px-3 py-3 text-left font-medium">Assign to</th>
-                      <th className="px-3 py-3 text-left font-medium">Impact</th>
-                      <th className="px-3 py-3 text-left font-medium">Argency</th>
-                      <th className="px-3 py-3 text-left font-medium">Priority</th>
+                      <th className="px-3 py-3 text-left font-medium">Sub Department</th>
+                      <th className="px-3 py-3 text-left font-medium">Document Number</th>
+                      <th className="px-3 py-3 text-left font-medium">Valid From</th>
+                      <th className="px-3 py-3 text-left font-medium">Valid Till</th>
+                      <th className="px-3 py-3 text-left font-medium">Work Rights</th>
+                      <th className="px-3 py-3 text-left font-medium">Driver License</th>
+                      <th className="px-3 py-3 text-left font-medium">WWCC</th>
+                      <th className="px-3 py-3 text-left font-medium">Police Check</th>
                     </tr>
                   </thead>
                   <tbody>
                     {resolvedCases.map((caseItem, index) => (
                       <tr key={caseItem.id} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                         <td className="px-3 py-3 text-primary">{caseItem.id}</td>
-                        <td className="px-3 py-3">{caseItem.requester}</td>
                         <td className="px-3 py-3">{caseItem.department}</td>
-                        <td className="px-3 py-3 max-w-[200px] truncate">{caseItem.shortDesc}</td>
-                        <td className="px-3 py-3 max-w-[200px] truncate">{caseItem.description}</td>
-                        <td className="px-3 py-3">{caseItem.category}</td>
-                        <td className="px-3 py-3">{caseItem.status}</td>
-                        <td className="px-3 py-3">{caseItem.subStatus}</td>
-                        <td className="px-3 py-3">{caseItem.assignmentGroup}</td>
-                        <td className="px-3 py-3">{caseItem.assignTo}</td>
-                        <td className="px-3 py-3">{caseItem.impact}</td>
-                        <td className="px-3 py-3">{caseItem.argency}</td>
-                        <td className="px-3 py-3">{caseItem.priority}</td>
+                        <td className="px-3 py-3">{caseItem.subDepartment}</td>
+                        <td className="px-3 py-3">{caseItem.documentNumber}</td>
+                        <td className="px-3 py-3">{caseItem.validFrom}</td>
+                        <td className="px-3 py-3">{caseItem.validTill}</td>
+                        <td className="px-3 py-3">{caseItem.workRights}</td>
+                        <td className="px-3 py-3">{caseItem.driverLicense || "-"}</td>
+                        <td className="px-3 py-3">{caseItem.wwcc || "-"}</td>
+                        <td className="px-3 py-3">{caseItem.policeCheck || "-"}</td>
                       </tr>
                     ))}
                   </tbody>

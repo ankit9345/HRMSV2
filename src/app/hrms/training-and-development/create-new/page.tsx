@@ -21,10 +21,10 @@ import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 
-export default function ClientOnboardingCompliancePage() {
+export default function TrainingCreateNewPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [contractStartDate, setContractStartDate] = useState<Date>()
-  const [contractEndDate, setContractEndDate] = useState<Date>()
+  const [startDate, setStartDate] = useState<Date>()
+  const [endDate, setEndDate] = useState<Date>()
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -33,103 +33,126 @@ export default function ClientOnboardingCompliancePage() {
         <HrmsSidebar
           isOpen={sidebarOpen}
           onClose={() => setSidebarOpen(false)}
-          activePage="client-onboarding-compliance"
-          activeSection="onboarding"
+          activePage="training-create-new"
+          activeSection="training-and-development"
         />
         <main className="flex-1 p-6 lg:ml-64">
           <Card>
             <CardHeader className="bg-muted py-3 px-4">
-              <CardTitle className="text-base font-medium">Onboarding Compliance</CardTitle>
+              <CardTitle className="text-base font-medium">Create New Training</CardTitle>
             </CardHeader>
             <CardContent className="p-6">
               <div className="space-y-4">
                 {/* Row 1 */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <Input placeholder="Company Name" />
-                  <Input placeholder="ABN" />
-                  <Input placeholder="ACN" />
-                  <Input placeholder="Address" />
+                  <Input placeholder="Employee Name" />
+                  <Input placeholder="Employee ID" />
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Department" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="cleaning">Cleaning</SelectItem>
+                      <SelectItem value="security">Security</SelectItem>
+                      <SelectItem value="gardening">Gardening</SelectItem>
+                      <SelectItem value="it">IT</SelectItem>
+                      <SelectItem value="accounts">Accounts</SelectItem>
+                      <SelectItem value="sales">Sales</SelectItem>
+                      <SelectItem value="marketing">Marketing</SelectItem>
+                      <SelectItem value="operations">Operations</SelectItem>
+                      <SelectItem value="compliance">Compliance</SelectItem>
+                      <SelectItem value="hr">HR</SelectItem>
+                      <SelectItem value="admin">Admin</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Input placeholder="Manager Name" />
                 </div>
 
                 {/* Row 2 */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <Input placeholder="Client SPOC Name" />
-                  <Input placeholder="SPOC Number" />
-                  <Input placeholder="Email Address" type="email" />
-                  <Input placeholder="Company Address" />
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Training Type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="technical">Technical</SelectItem>
+                      <SelectItem value="compliance">Compliance</SelectItem>
+                      <SelectItem value="safety">Safety</SelectItem>
+                      <SelectItem value="soft-skills">Soft Skills</SelectItem>
+                      <SelectItem value="leadership">Leadership</SelectItem>
+                      <SelectItem value="onboarding">Onboarding</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Input placeholder="Training Name" />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "justify-start text-left font-normal bg-transparent",
+                          !startDate && "text-muted-foreground"
+                        )}
+                      >
+                        <Calendar className="mr-2 h-4 w-4" />
+                        {startDate ? format(startDate, "PPP") : "Start Date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <CalendarComponent
+                        mode="single"
+                        selected={startDate}
+                        onSelect={setStartDate}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "justify-start text-left font-normal bg-transparent",
+                          !endDate && "text-muted-foreground"
+                        )}
+                      >
+                        <Calendar className="mr-2 h-4 w-4" />
+                        {endDate ? format(endDate, "PPP") : "End Date"}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <CalendarComponent
+                        mode="single"
+                        selected={endDate}
+                        onSelect={setEndDate}
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </div>
 
                 {/* Row 3 */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <Input placeholder="Company Phone Number" />
-                  <Input placeholder="Contract Number" />
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "justify-start text-left font-normal bg-transparent",
-                          !contractStartDate && "text-muted-foreground"
-                        )}
-                      >
-                        <Calendar className="mr-2 h-4 w-4" />
-                        {contractStartDate ? format(contractStartDate, "PPP") : "Contract Start Date"}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <CalendarComponent
-                        mode="single"
-                        selected={contractStartDate}
-                        onSelect={setContractStartDate}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "justify-start text-left font-normal bg-transparent",
-                          !contractEndDate && "text-muted-foreground"
-                        )}
-                      >
-                        <Calendar className="mr-2 h-4 w-4" />
-                        {contractEndDate ? format(contractEndDate, "PPP") : "Contract End Date"}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <CalendarComponent
-                        mode="single"
-                        selected={contractEndDate}
-                        onSelect={setContractEndDate}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
+                  <Input placeholder="Trainer Name" />
+                  <Input placeholder="Training Location" />
+                  <Select>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="scheduled">Scheduled</SelectItem>
+                      <SelectItem value="in-progress">In Progress</SelectItem>
+                      <SelectItem value="completed">Completed</SelectItem>
+                      <SelectItem value="cancelled">Cancelled</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Input placeholder="Certification (if any)" />
                 </div>
-
-                {/* Row 4 - Type of Contract */}
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-                  <div className="space-y-1">
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Type of Contract" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="adhoc">Adhoc</SelectItem>
-                        <SelectItem value="contractual">Contractual</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-muted-foreground pl-1">Adhoc / Contractual</p>
-                  </div>
-                </div>
-
-                {/* Short Description */}
-                <Textarea placeholder="Short Description" className="min-h-[80px]" />
 
                 {/* Description */}
-                <Textarea placeholder="Description" className="min-h-[120px]" />
+                <Textarea placeholder="Training Description" className="min-h-[100px]" />
+
+                {/* Notes */}
+                <Textarea placeholder="Additional Notes" className="min-h-[80px]" />
               </div>
             </CardContent>
             <div className="flex items-center justify-end gap-2 bg-muted px-4 py-3">

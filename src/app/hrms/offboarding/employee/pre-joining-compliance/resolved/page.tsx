@@ -7,8 +7,8 @@ import { LeaveFooter } from "@/components/leave-footer"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 const resolvedCases = [
-  { id: "103", requester: "Saumya Singh", department: "Operations", shortDesc: "The point of using Lorem Ipsum is that it ...", description: "The point of using Lorem Ipsum is that it ...", category: "Compensation", status: "Resolved", subStatus: "", assignmentGroup: "Recruitment Team", assignTo: "HR", impact: "", argency: "", priority: "" },
-  { id: "104", requester: "Kanak Singh", department: "HR", shortDesc: "The point of using Lorem Ipsum is that it ...", description: "The point of using Lorem Ipsum is that it ...", category: "Compensation", status: "Resolved", subStatus: "", assignmentGroup: "Recruitment Team", assignTo: "HR", impact: "", argency: "", priority: "" },
+  { id: "103", department: "Gardening", subDepartment: "Garden Hand", documentNumber: "DOC-003", validFrom: "2024-03-01", validTill: "2025-03-01", workRights: "Working Visa", driverLicense: "Yes", wwcc: "Yes", policeCheck: "Yes" },
+  { id: "105", department: "HR", subDepartment: "", documentNumber: "DOC-005", validFrom: "2024-05-01", validTill: "2025-05-01", workRights: "PR", driverLicense: "Yes", wwcc: "Yes", policeCheck: "Yes" },
 ]
 
 export default function OffboardingEmployeePreJoiningResolvedPage() {
@@ -34,37 +34,31 @@ export default function OffboardingEmployeePreJoiningResolvedPage() {
                 <table className="w-full">
                   <thead>
                     <tr className="bg-[#1e88e5] text-white">
-                      <th className="px-3 py-3 text-left text-xs font-medium">Case ID</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Requester Name</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium">ID</th>
                       <th className="px-3 py-3 text-left text-xs font-medium">Department</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Short Description</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Description</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Category</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Status</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Sub Status</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Assignment Group</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Assign to</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Impact</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Argency</th>
-                      <th className="px-3 py-3 text-left text-xs font-medium">Priority</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium">Sub Department</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium">Document Number</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium">Valid From</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium">Valid Till</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium">Work Rights</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium">Driver License</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium">WWCC</th>
+                      <th className="px-3 py-3 text-left text-xs font-medium">Police Check</th>
                     </tr>
                   </thead>
                   <tbody>
                     {resolvedCases.map((caseItem, index) => (
                       <tr key={caseItem.id} className={index % 2 === 0 ? "bg-white" : "bg-gray-50"}>
                         <td className="px-3 py-3 text-xs text-blue-600">{caseItem.id}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.requester}</td>
                         <td className="px-3 py-3 text-xs">{caseItem.department}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.shortDesc}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.description}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.category}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.status}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.subStatus}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.assignmentGroup}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.assignTo}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.impact}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.argency}</td>
-                        <td className="px-3 py-3 text-xs">{caseItem.priority}</td>
+                        <td className="px-3 py-3 text-xs">{caseItem.subDepartment}</td>
+                        <td className="px-3 py-3 text-xs">{caseItem.documentNumber}</td>
+                        <td className="px-3 py-3 text-xs">{caseItem.validFrom}</td>
+                        <td className="px-3 py-3 text-xs">{caseItem.validTill}</td>
+                        <td className="px-3 py-3 text-xs">{caseItem.workRights}</td>
+                        <td className="px-3 py-3 text-xs">{caseItem.driverLicense || "-"}</td>
+                        <td className="px-3 py-3 text-xs">{caseItem.wwcc || "-"}</td>
+                        <td className="px-3 py-3 text-xs">{caseItem.policeCheck || "-"}</td>
                       </tr>
                     ))}
                   </tbody>

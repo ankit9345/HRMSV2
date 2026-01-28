@@ -13,6 +13,7 @@ import {
   UserPlus,
   UserMinus,
   User,
+  GraduationCap,
 } from "lucide-react"
 
 interface HrmsSidebarProps {
@@ -46,6 +47,7 @@ export function HrmsSidebar({
     leaveManagement: activeSection === "leave-management",
     onboarding: activeSection === "onboarding",
     offboarding: activeSection === "offboarding",
+    trainingAndDevelopment: activeSection === "training-and-development",
     client: false,
     employee: false,
     joiningRequirements: false,
@@ -236,14 +238,14 @@ export function HrmsSidebar({
                     </button>
                     {expandedSections.employee && (
                       <div>
-                        {/* Joining Requirements Sub-sub-section */}
+                        {/* Resource Requirement Sub-sub-section */}
                         <button
                           onClick={() => toggleSection("joiningRequirements")}
                           className="flex w-full items-center justify-between px-6 py-2 text-left"
                         >
                           <div className="flex items-center gap-2">
                             <User className="h-4 w-4 text-primary" />
-                            <span className={cn("text-sm", activePage?.startsWith("employee-joining") ? "text-primary" : "text-foreground")}>Joining Requirements</span>
+                            <span className={cn("text-sm", activePage?.startsWith("employee-joining") ? "text-primary" : "text-foreground")}>Resource Requirement</span>
                           </div>
                         </button>
                         {expandedSections.joiningRequirements && (
@@ -458,14 +460,14 @@ export function HrmsSidebar({
                     </button>
                     {expandedSections.offEmployee && (
                       <div>
-                        {/* Joining Requirements Sub-sub-section */}
+                        {/* Resource Requirement Sub-sub-section */}
                         <button
                           onClick={() => toggleSection("offJoiningRequirements")}
                           className="flex w-full items-center justify-between px-6 py-2 text-left"
                         >
                           <div className="flex items-center gap-2">
                             <User className="h-4 w-4 text-primary" />
-                            <span className={cn("text-sm", activePage?.startsWith("off-employee-joining") ? "text-primary" : "text-foreground")}>Joining Requirements</span>
+                            <span className={cn("text-sm", activePage?.startsWith("off-employee-joining") ? "text-primary" : "text-foreground")}>Resource Requirement</span>
                           </div>
                         </button>
                         {expandedSections.offJoiningRequirements && (
@@ -609,6 +611,56 @@ export function HrmsSidebar({
                     )}
                   </div>
                 </div>
+              )}
+            </div>
+
+            {/* Training and Development Section */}
+            <div className="border-b border-border">
+              <button
+                onClick={() => toggleSection("trainingAndDevelopment")}
+                className="flex w-full items-center justify-between bg-muted px-4 py-3 text-left"
+              >
+                <div className="flex items-center gap-2">
+                  <GraduationCap className="h-4 w-4 text-foreground" />
+                  <span className={cn("font-medium", activeSection === "training-and-development" ? "text-primary" : "text-foreground")}>Training and Development</span>
+                </div>
+                {expandedSections.trainingAndDevelopment ? (
+                  <Minus className="h-4 w-4 text-muted-foreground" />
+                ) : (
+                  <Plus className="h-4 w-4 text-muted-foreground" />
+                )}
+              </button>
+              {expandedSections.trainingAndDevelopment && (
+                <ul className="py-1">
+                  <li>
+                    <Link
+                      href="/hrms/training-and-development"
+                      className={cn(
+                        "block px-6 py-2 text-sm transition-colors",
+                        activePage === "training-all" && activeSection === "training-and-development"
+                          ? "text-primary"
+                          : "text-foreground hover:text-primary"
+                      )}
+                      onClick={onClose}
+                    >
+                      All
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/hrms/training-and-development/create-new"
+                      className={cn(
+                        "block px-6 py-2 text-sm transition-colors",
+                        activePage === "training-create-new" && activeSection === "training-and-development"
+                          ? "text-primary"
+                          : "text-foreground hover:text-primary"
+                      )}
+                      onClick={onClose}
+                    >
+                      Create New
+                    </Link>
+                  </li>
+                </ul>
               )}
             </div>
           </nav>
